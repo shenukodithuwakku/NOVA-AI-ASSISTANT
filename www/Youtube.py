@@ -27,22 +27,40 @@ def takeCommand():
                 talk(f"Playing {song} on YouTube")
                 pywhatkit.playonyt(song)
             elif 'open youtube' in command:
-                talk("Opening YouTube")
+                talk("Hey dear.....Please wait.....Your request is processing now......Opening youtube now....")
                 webbrowser.open("https://www.youtube.com")
             elif 'open facebook' in command:
-                talk("Opening Facebook")
+                talk("Hey dear.....Please wait.....Your request is processing now......Opening Facebook now....")
                 webbrowser.open("https://www.facebook.com")
             elif 'open whatsapp' in command:
-                talk("Opening WhatsApp")
+                talk("Hey dear.....Please wait.....Your request is processing now......Opening WhatsApp now....")
                 webbrowser.open("https://web.whatsapp.com")
             elif 'open google' in command:
-                talk("Opening Google")
+                talk("Hey dear.....Please wait.....Your request is processing now......Opening Google now....")
                 webbrowser.open("https://www.google.com")
             elif 'open email' in command:
-                talk("Opening Email")
+                talk("Hey dear.....Please wait.....Your request is processing now......Opening Email now....")
                 webbrowser.open("https://mail.google.com")
+            elif 'open github' in command:
+                talk("Hey dear.....Please wait.....Your request is processing now......Opening Github now....")
+                webbrowser.open("https://www.github.com")
+            elif 'open microsoft word' in command:
+                talk("Hey dear.....Please wait.....Your request is processing now......Opening Microsoft Word now....")
+                webbrowser.open("https://www.office.com/launch/word")
+            elif 'open microsoft powerpoint' in command:
+                talk("Hey dear.....Please wait.....Your request is processing now......Opening Powerpoint now....")
+                webbrowser.open("https://www.office.com/launch/powerpoint")
+            elif 'open microsoft excel' in command:
+                talk("Hey dear.....Please wait.....Your request is processing now......Opening Excel now....")
+                webbrowser.open("https://www.office.com/launch/excel")
+            elif 'open viber' in command:
+                talk("Hey dear.....Please wait.....Your request is processing now......Opening Viber now....")
+                webbrowser.open("https://www.viber.com/en/download/")
+            elif 'open imo' in command:
+                talk("Hey dear.....Please wait.....Your request is processing now......Opening imo now....")
+                webbrowser.open("https://www.imo.com/en/download/")                    
             else:
-                talk("Sorry, I didn't understand that command.")
+                talk("Sorry dear, I didn't understand that command.")
                 print("No valid command detected.")
     except sr.UnknownValueError:
         print("Sorry, I did not understand the audio.")
