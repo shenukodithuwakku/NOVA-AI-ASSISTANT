@@ -25,7 +25,7 @@ def listen_for_command():
 def main():
     """Main function to listen for a command and respond with the current time."""
     command = listen_for_command()
-    if "wha is the time now" in command:
+    if "what is the time now" in command:
         now = datetime.now()
         current_time = now.strftime("%I:%M %p")  # Format: HH:MM AM/PM
         speak(f"The current time is {current_time}.")
