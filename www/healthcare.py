@@ -1,8 +1,8 @@
 import datetime
 import json
 import os
+import speech_recognition as sr
 
-# Reminders
 def set_reminder(reminder, time):
     reminders = load_data("reminders.json")
     reminders.append({"reminder": reminder, "time": time})
@@ -17,7 +17,6 @@ def get_reminders():
         if reminder_time > now:
             print(f"Upcoming Reminder: {r['reminder']} at {r['time']}")
 
-# Appointments
 def add_appointment(doctor, date, time):
     appointments = load_data("appointments.json")
     appointments.append({"doctor": doctor, "date": date, "time": time})
@@ -29,7 +28,7 @@ def view_appointments():
     for a in appointments:
         print(f"Appointment with Dr. {a['doctor']} on {a['date']} at {a['time']}")
 
-# Schedule
+
 def add_schedule(task, date, time):
     schedule = load_data("schedule.json")
     schedule.append({"task": task, "date": date, "time": time})
@@ -41,7 +40,7 @@ def view_schedule():
     for s in schedule:
         print(f"Task: {s['task']} on {s['date']} at {s['time']}")
 
-# Health Metrics Tracking
+
 def track_health_metric(metric, value):
     metrics = load_data("health_metrics.json")
     metrics.append({"metric": metric, "value": value, "date": str(datetime.datetime.now())})
@@ -53,23 +52,27 @@ def view_health_metrics():
     for m in metrics:
         print(f"{m['metric']}: {m['value']} (Recorded on {m['date']})")
 
-# Chatbot
+
 def chatbot_response(user_input):
     responses = {
+        "fever": "It seems like you have a fever. Make sure to stay hydrated and rest. If it persists, consult a doctor.",
+        "headache": "For headaches, try to rest in a quiet, dark room and stay hydrated. If it’s severe, consider seeing a doctor.",
+        "cough": "A cough could be due to a cold or allergies. Drink warm fluids and monitor your symptoms.",
+        "diabetes": "Managing diabetes involves a healthy diet, regular exercise, and monitoring blood sugar levels. Consult your doctor for a personalized plan.",
         "hello": "Hi! How can I assist you with your healthcare today?",
         "how are you": "I'm just a program, but I'm here to help you stay healthy!",
         "bye": "Goodbye! Stay healthy!"
     }
-    return responses.get(user_input.lower(), "I'm sorry, I didn't understand that.")
+    return responses.get(user_input.lower(), "I'm sorry, I don't have enough information about that. Please consult a healthcare professional.")
 
-# Diet and Exercise Recommendations
+
 def get_diet_recommendation():
     return "Eat a balanced diet with fruits, vegetables, lean proteins, and whole grains."
 
 def get_exercise_recommendation():
     return "Aim for at least 30 minutes of moderate exercise, 5 days a week."
 
-# Health Records Storage
+
 def add_health_record(record):
     records = load_data("health_records.json")
     records.append({"record": record, "date": str(datetime.datetime.now())})
@@ -81,7 +84,7 @@ def view_health_records():
     for r in records:
         print(f"Record: {r['record']} (Added on {r['date']})")
 
-# Utility Functions for Data Storage
+
 def load_data(filename):
     if not os.path.exists(filename):
         return []
@@ -92,31 +95,34 @@ def save_data(filename, data):
     with open(filename, "w") as file:
         json.dump(data, file, indent=4)
 
-# Example Usage
+
+def speech_to_text():
+    recognizer = sr.Recognizer()
+    with sr.Microphone() as source:
+        print("Listening for your health problem...")
+        try:
+            audio = recognizer.listen(source)
+            user_input = recognizer.recognize_google(audio)
+            print(f"You said: {user_input}")
+            return user_input
+        except sr.UnknownValueError:
+            print("Sorry, I could not understand the audio.")
+            return None
+        except sr.RequestError as e:
+            print(f"Could not request results from Google Speech Recognition service; {e}")
+            return None
+
+
 if __name__ == "__main__":
-    # Set a reminder
-    set_reminder("Take medication", "2025-05-10 18:00:00")
-    get_reminders()
-
-    # Add an appointment
-    add_appointment("Smith", "2025-05-12", "10:00 AM")
-    view_appointments()
-
-    # Add a task to the schedule
-    add_schedule("Morning Walk", "2025-05-11", "07:00 AM")
-    view_schedule()
-
-    # Track health metrics
-    track_health_metric("Blood Pressure", "120/80")
-    view_health_metrics()
-
-    # Chatbot interaction
-    print(chatbot_response("hello"))
-
-    # Diet and exercise recommendations
-    print(get_diet_recommendation())
-    print(get_exercise_recommendation())
-
-    # Add and view health records
-    add_health_record("Routine check-up: All good.")
-    view_health_records()
+    print("Welcome to the Healthcare Assistant!")
+    print("You can speak your health problem, and I will try to assist you.")
+    
+    while True:
+        user_input = speech_to_text()
+        if user_input:
+            if "exit" in user_input.lower() or "bye" in user_input.lower():
+                print("Goodbye! Stay healthy!")
+                break
+            else:
+                response = chatbot_response(user_input)
+                print(f"Assistant: {response}")
