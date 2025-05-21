@@ -25,12 +25,14 @@ def listen_for_command():
 def main():
     """Main function to listen for a command and respond with the current time."""
     command = listen_for_command()
-    if "what is the time now" in command:
+    if "what is the time now"in command or "tell the time" in command or "Nova please tell the time" in command or "Time please" in command or "Nova what is the time" in command :
         now = datetime.now()
-        current_time = now.strftime("%I:%M %p")  # Format: HH:MM AM/PM
-        speak(f"The current time is {current_time}.")
+        current_time = now.strftime("%I:%M %p") 
+        speak(f"The time is.... {current_time}.")
+    elif command == "":
+        speak("Sorry, I didn't catch that. Please try again.")    
     else:
-        speak("I can only tell you the time if you ask 'what is the time now'.")
+        speak("Sorry, I didn't clear that.. Please try again." in command or "I can't understand..please tell again")
 
 if __name__ == "__main__":
     main()
