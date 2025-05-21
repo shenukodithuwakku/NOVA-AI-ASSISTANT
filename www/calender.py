@@ -29,7 +29,10 @@ def main():
     if "what day is it today" in command:
         today = datetime.now().strftime("%A, %d %B %Y")  # Format: Day, DD Month YYYY
         speak(f"Today is {today}.")
+<<<<<<< Updated upstream
     
+=======
+>>>>>>> Stashed changes
     else:
         speak("Sorry, I didn't understand that command.")
 
