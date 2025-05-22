@@ -5,7 +5,7 @@ import eel
 
 eel.init('www')
 
-# Reminders
+
 def set_reminder(reminder, time):
     reminders = load_data("reminders.json")
     reminders.append({"reminder": reminder, "time": time})
@@ -22,7 +22,7 @@ def get_reminders():
             upcoming.append(f"{r['reminder']} at {r['time']}")
     return upcoming
 
-# Appointments
+
 def add_appointment(doctor, date, time):
     appointments = load_data("appointments.json")
     appointments.append({"doctor": doctor, "date": date, "time": time})
@@ -33,7 +33,7 @@ def view_appointments():
     appointments = load_data("appointments.json")
     return [f"Appointment with Dr. {a['doctor']} on {a['date']} at {a['time']}" for a in appointments]
 
-# Schedule
+
 def add_schedule(task, date, time):
     schedule = load_data("schedule.json")
     schedule.append({"task": task, "date": date, "time": time})
@@ -44,7 +44,7 @@ def view_schedule():
     schedule = load_data("schedule.json")
     return [f"Task: {s['task']} on {s['date']} at {s['time']}" for s in schedule]
 
-# Health Metrics Tracking
+
 def track_health_metric(metric, value):
     metrics = load_data("health_metrics.json")
     metrics.append({"metric": metric, "value": value, "date": str(datetime.datetime.now())})
@@ -55,7 +55,6 @@ def view_health_metrics():
     metrics = load_data("health_metrics.json")
     return [f"{m['metric']}: {m['value']} (Recorded on {m['date']})" for m in metrics]
 
-# Chatbot with many responses
 @eel.expose
 def chatbot_response(user_input):
     responses = {
@@ -95,14 +94,14 @@ def chatbot_response(user_input):
             return responses[key]
     return "I'm sorry, I don't have enough information about that. Please consult a healthcare professional."
 
-# Diet and Exercise Recommendations
+
 def get_diet_recommendation():
     return "Eat a balanced diet with fruits, vegetables, lean proteins, and whole grains."
 
 def get_exercise_recommendation():
     return "Aim for at least 30 minutes of moderate exercise, 5 days a week."
 
-# Health Records Storage
+
 def add_health_record(record):
     records = load_data("health_records.json")
     records.append({"record": record, "date": str(datetime.datetime.now())})
@@ -113,7 +112,6 @@ def view_health_records():
     records = load_data("health_records.json")
     return [f"Record: {r['record']} (Added on {r['date']})" for r in records]
 
-# Utility Functions for Data Storage
 def load_data(filename):
     if not os.path.exists(filename):
         return []
