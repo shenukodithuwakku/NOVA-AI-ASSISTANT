@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Healthcare App</title>
+    <script type="text/javascript" src="/eel.js"></script>
+</head>
+<body>
+    <h1>Welcome to Healthcare App</h1>
+    <button onclick="setReminder()">Set Reminder</button>
+    <button onclick="showReminders()">Show Reminders</button>
+    <div id="reminderResult"></div>
+    <script>
+        function setReminder() {
+            const reminder = prompt("Enter your reminder:");
+            const time = prompt("Enter time (YYYY-MM-DD HH:MM:SS):");
+            if (reminder && time) {
+                eel.set_reminder(reminder, time)(function(result) {
+                    document.getElementById("reminderResult").innerText = result;
+                });
+            }
+        }
+        function showReminders() {
+            eel.get_reminders()(function(reminders) {
+                if (reminders.length === 0) {
+                    document.getElementById("reminderResult").innerText = "No upcoming reminders.";
+                } else {
+                    document.getElementById("reminderResult").innerText = reminders.join("\n");
+                }
+            });
+        }
+    </script>
+</body>
+</html>

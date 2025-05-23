@@ -1,11 +1,7 @@
-from os import startfile
-from tracemalloc import start
-from xnl.etree.ElementTree import fromstring
 import speech_recognition as sr
 import pyttsx3
 import pywhatkit as kt
-from item import sleep
-import getpass as gp
+from time import sleep
 
 listener=sr.Recognizer()
 engine=pyttsx3.init()
@@ -24,19 +20,27 @@ def get_info():
             return info.lower()
     except:
         talk("Sorry , Did not understand the audio.") 
-         pass
+        pass
 
 def whatsappmsg(name,message,time_hour,time_min):
 
     kt.sendwhatmsg(name,message,time_hour,time_min)
 
-number_list = {"Amma":"0782511654"}
+number_list = {
+    "Amma": "+94782511654",
+    "Thaththa": "+94771234567",
+    "Friend": "+94770000000"
+}
 
 def writemsg():
     talk("to whom you want to send whatsapp")
     print("towhom you want to send whatsapp")
     name=get_info()
-    name=number_list[name]
+    if name in number_list:
+        name = number_list[name]
+    else:
+        talk("Name not found in contact list.")
+        return
     print(name)
     talk("what is message who you want to send")
     print("what is message who you want to send")
@@ -54,8 +58,9 @@ def writemsg():
     talk("Whatsapp message has been sent successfully!!")
     talk("Do you want to send more messages")
     send_more=get_info()
-    if "Yes" in send_more:
-        get_info()
-        writemsg()       
+    if "yes" in send_more.lower():
+        writemsg()
+
+writemsg()
 
 

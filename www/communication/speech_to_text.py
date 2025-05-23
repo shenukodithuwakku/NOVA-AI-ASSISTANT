@@ -17,13 +17,13 @@ def record_text():
                 MyText = r.recognize_google(audio2)
 
 
-    except sr.RequestError as e:
-        print("Could not request results; {0}".format(e))
+        except sr.RequestError as e:
+            print("Could not request results; {0}".format(e))
 
-    except sr.UnknownValueError:
-        print("unknown error occurred")
+        except sr.UnknownValueError:
+            print("unknown error occurred")
 
-  return
+        return
 
 def output_text(text):
     f = open("output.text", "a")
