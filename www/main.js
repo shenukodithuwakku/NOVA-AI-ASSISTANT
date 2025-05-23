@@ -3,14 +3,16 @@ $(document).ready(function () {
     $('.text').textillate({
         loop: true,
         sync: true,
-        in: {
-            effect: "bounceIn",
+        in:{
+            effect: 'bounceIn',
         },
-        out: {
-            effect: "bounceOut",
+        out:{
+            effect: 'bounceOut',
         },
 
     });
+    
+
 
     //Siri Configuration
     var siriWave = new SiriWave({
