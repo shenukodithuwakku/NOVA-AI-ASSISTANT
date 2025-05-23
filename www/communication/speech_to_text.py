@@ -1,5 +1,6 @@
 import speech_recognition as sr
 import pyttsx3
+import pywhatkit as kit
 
 r = sr.Recognizer()
 
@@ -17,13 +18,13 @@ def record_text():
                 MyText = r.recognize_google(audio2)
 
 
-    except sr.RequestError as e:
-        print("Could not request results; {0}".format(e))
+        except sr.RequestError as e:
+           print("Could not request results; {0}".format(e))
 
-    except sr.UnknownValueError:
-        print("unknown error occurred")
+        except sr.UnknownValueError:
+            print("unknown error occurred")
 
-  return
+        return
 
 def output_text(text):
     f = open("output.text", "a")
@@ -36,4 +37,4 @@ while(1):
     text = record_text()
     output_text(text)
 
-    print("Wrote text")                    
+    print("Wrote text")
