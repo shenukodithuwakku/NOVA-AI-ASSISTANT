@@ -10,6 +10,10 @@ def speak(message):
 
 def listen_for_command():
     """Listen for a voice command and return it as text."""
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
     recognizer = sr.Recognizer()
     with sr.Microphone() as source:
         print("Listening for your command...")
@@ -25,9 +29,15 @@ def listen_for_command():
 def main():
     """Main function to listen for a command and respond with the current date."""
     command = listen_for_command()
+<<<<<<< Updated upstream
     if "what is today" in command:
         today = datetime.now().strftime("%A, %d %B %Y")  
         speak(f"Today is.. {today}.")
+=======
+    if "what day is it today" in command:
+        today = datetime.now().strftime("%A, %d %B %Y")  # Format: Day, DD Month YYYY
+        speak(f"Today is {today}.")
+>>>>>>> Stashed changes
     else:
         speak("Sorry, I didn't understand that command.")
 

@@ -3,29 +3,179 @@
 <head>
     <title>Healthcare App</title>
     <script type="text/javascript" src="/eel.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; background: #f7f7f7; }
+        h1 { color: #2c3e50; }
+        .section { background: #fff; padding: 20px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 8px #eee; }
+        label { display: block; margin-top: 10px; }
+        input, textarea, select, button { margin-top: 5px; margin-bottom: 10px; padding: 6px; border-radius: 4px; border: 1px solid #ccc; }
+        button { background: #3498db; color: #fff; border: none; cursor: pointer; }
+        button:hover { background: #2980b9; }
+        #chatbox { width: 100%; height: 120px; }
+        .result { margin-top: 10px; color: #2c3e50; }
+        .list { margin-top: 10px; background: #f0f0f0; padding: 10px; border-radius: 4px; }
+    </style>
 </head>
 <body>
     <h1>Welcome to Healthcare App</h1>
-    <button onclick="setReminder()">Set Reminder</button>
-    <button onclick="showReminders()">Show Reminders</button>
-    <div id="reminderResult"></div>
-    <script>
+
+    <!-- Reminders Section -->
+    <div class="section">
+        <h2>Reminders</h2>
+        <label>Reminder:</label>
+        <input type="text" id="reminderText" placeholder="Enter reminder">
+        <label>Time (YYYY-MM-DD HH:MM:SS):</label>
+        <input type="text" id="reminderTime" placeholder="2025-05-23 15:30:00">
+        <button onclick="setReminder()">Set Reminder</button>
+        <button onclick="showReminders()">Show Reminders</button>
+        <div id="reminderResult" class="result"></div>
+    </div>
+
+    <!-- Appointments Section -->
+    <div class="section">
+        <h2>Appointments</h2>
+        <label>Doctor's Name:</label>
+        <input type="text" id="doctorName" placeholder="Dr. Silva">
+        <label>Date (YYYY-MM-DD):</label>
+        <input type="text" id="appointmentDate" placeholder="2025-05-23">
+        <label>Time (HH:MM):</label>
+        <input type="text" id="appointmentTime" placeholder="15:30">
+        <button onclick="addAppointment()">Add Appointment</button>
+        <button onclick="viewAppointments()">View Appointments</button>
+        <div id="appointmentResult" class="result"></div>
+    </div>
+
+    <!-- Schedule Section -->
+    <div class="section">
+        <h2>Schedule</h2>
+        <label>Task:</label>
+        <input type="text" id="taskText" placeholder="Take medicine">
+        <label>Date (YYYY-MM-DD):</label>
+        <input type="text" id="taskDate" placeholder="2025-05-23">
+        <label>Time (HH:MM):</label>
+        <input type="text" id="taskTime" placeholder="08:00">
+        <button onclick="addSchedule()">Add to Schedule</button>
+        <button onclick="viewSchedule()">View Schedule</button>
+        <div id="scheduleResult" class="result"></div>
+    </div>
+
+    <!-- Health Metrics Section -->
+    <div class="section">
+        <h2>Health Metrics</h2>
+        <label>Metric (e.g., Blood Pressure):</label>
+        <input type="text" id="metricName" placeholder="Blood Pressure">
+        <label>Value:</label>
+        <input type="text" id="metricValue" placeholder="120/80">
+        <button onclick="addMetric()">Add Metric</button>
+        <button onclick="viewMetrics()">View Metrics</button>
+        <div id="metricResult" class="result"></div>
+    </div>
+
+    <!-- Health Records Section -->
+    <div class="section">
+        <h2>Health Records</h2>
+        <label>Record:</label>
+        <textarea id="healthRecord" rows="2" placeholder="Describe your health record"></textarea>
+        <button onclick="addHealthRecord()">Add Record</button>
+        <button onclick="viewHealthRecords()">View Records</button>
+        <div id="healthRecordResult" class="result"></div>
+    </div>
+
+    <!-- Chatbot Section -->
+    <div class="section">
+        <h2>Healthcare Chatbot</h2>
+        <textarea id="chatbox" placeholder="Ask a health question..."></textarea>
+        <button onclick="askChatbot()">Ask</button>
+        <div id="chatbotResult" class="result"></div>
+    </div>
+
+    <script type="text/javascript">
+        // Reminders
         function setReminder() {
-            const reminder = prompt("Enter your reminder:");
-            const time = prompt("Enter time (YYYY-MM-DD HH:MM:SS):");
-            if (reminder && time) {
-                eel.set_reminder(reminder, time)(function(result) {
-                    document.getElementById("reminderResult").innerText = result;
-                });
-            }
+            const reminder = document.getElementById("reminderText").value;
+            const time = document.getElementById("reminderTime").value;
+            eel.set_reminder(reminder, time)(function(result) {
+                document.getElementById("reminderResult").innerText = result;
+            });
         }
         function showReminders() {
             eel.get_reminders()(function(reminders) {
-                if (reminders.length === 0) {
-                    document.getElementById("reminderResult").innerText = "No upcoming reminders.";
-                } else {
-                    document.getElementById("reminderResult").innerText = reminders.join("\n");
-                }
+                document.getElementById("reminderResult").innerHTML = reminders.length
+                    ? "<div class='list'>" + reminders.join("<br>") + "</div>"
+                    : "No upcoming reminders.";
+            });
+        }
+
+        // Appointments
+        function addAppointment() {
+            const doctor = document.getElementById("doctorName").value;
+            const date = document.getElementById("appointmentDate").value;
+            const time = document.getElementById("appointmentTime").value;
+            eel.add_appointment(doctor, date, time)(function(result) {
+                document.getElementById("appointmentResult").innerText = result;
+            });
+        }
+        function viewAppointments() {
+            eel.view_appointments()(function(appointments) {
+                document.getElementById("appointmentResult").innerHTML = appointments.length
+                    ? "<div class='list'>" + appointments.join("<br>") + "</div>"
+                    : "No appointments.";
+            });
+        }
+
+        // Schedule
+        function addSchedule() {
+            const task = document.getElementById("taskText").value;
+            const date = document.getElementById("taskDate").value;
+            const time = document.getElementById("taskTime").value;
+            eel.add_schedule(task, date, time)(function(result) {
+                document.getElementById("scheduleResult").innerText = result;
+            });
+        }
+        function viewSchedule() {
+            eel.view_schedule()(function(schedule) {
+                document.getElementById("scheduleResult").innerHTML = schedule.length
+                    ? "<div class='list'>" + schedule.join("<br>") + "</div>"
+                    : "No scheduled tasks.";
+            });
+        }
+
+        // Health Metrics
+        function addMetric() {
+            const metric = document.getElementById("metricName").value;
+            const value = document.getElementById("metricValue").value;
+            eel.track_health_metric(metric, value)(function(result) {
+                document.getElementById("metricResult").innerText = result;
+            });
+        }
+        function viewMetrics() {
+            eel.view_health_metrics()(function(metrics) {
+                document.getElementById("metricResult").innerHTML = metrics.length
+                    ? "<div class='list'>" + metrics.join("<br>") + "</div>"
+                    : "No health metrics recorded.";
+            });
+        }
+
+        // Health Records
+        function addHealthRecord() {
+            const record = document.getElementById("healthRecord").value;
+            eel.add_health_record(record)(function(result) {
+                document.getElementById("healthRecordResult").innerText = result;
+            });
+        }
+        function viewHealthRecords() {
+            eel.view_health_records()(function(records) {
+                document.getElementById("healthRecordResult").innerHTML = records.length
+                    ? "<div class='list'>" + records.join("<br>") + "</div>"
+                    : "No health records.";
+            });
+        }
+
+        // Chatbot
+        function askChatbot() {
+            const user_input = document.getElementById("chatbox").value;
+            eel.chatbot_response(user_input)(function(result) {
+                document.getElementById("chatbotResult").innerText = result;
             });
         }
     </script>

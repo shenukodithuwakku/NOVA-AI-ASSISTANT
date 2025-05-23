@@ -124,3 +124,4 @@ def save_data(filename, data):
 
 if __name__ == "__main__":
     eel.start('new.html', size=(900, 700))  # Make sure 'new.html' exists in the www folder
+
