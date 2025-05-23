@@ -27,9 +27,9 @@ def whatsappmsg(name,message,time_hour,time_min):
     kt.sendwhatmsg(name,message,time_hour,time_min)
 
 number_list = {
-    "Amma": "+94782511654",
-    "Thaththa": "+94771234567",
-    "Friend": "+94770000000"
+    "Mom": "+94782511654",
+    "dad": "+94771234567",
+    "amaya": "+94770000000"
 }
 
 def writemsg():

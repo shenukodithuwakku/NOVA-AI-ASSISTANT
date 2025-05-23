@@ -12,6 +12,7 @@ def set_reminder(reminder, time):
     save_data("reminders.json", reminders)
     return f"Reminder set: {reminder} at {time}"
 
+@eel.expose
 def get_reminders():
     reminders = load_data("reminders.json")
     now = datetime.datetime.now()
