@@ -1,5 +1,6 @@
 import speech_recognition as sr
 import pyttsx3
+import pywhatkit as kit
 
 r = sr.Recognizer()
 
@@ -18,7 +19,11 @@ def record_text():
 
 
         except sr.RequestError as e:
+<<<<<<< HEAD
             print("Could not request results; {0}".format(e))
+=======
+           print("Could not request results; {0}".format(e))
+>>>>>>> a54ae0a38056eab7c433e4f63e8dc48c40076dae
 
         except sr.UnknownValueError:
             print("unknown error occurred")
@@ -36,4 +41,4 @@ while(1):
     text = record_text()
     output_text(text)
 
-    print("Wrote text")                    
+    print("Wrote text")
