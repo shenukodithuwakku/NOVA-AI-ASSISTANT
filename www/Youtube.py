@@ -28,42 +28,45 @@ def takeCommand():
                 pywhatkit.playonyt(song)
             elif 'open youtube' in command:
                 talk("Opening Youtube")
-                talk("Hey dear.....Please wait.....Your request is processing now......Opening youtube now....")
+                talk("Hey dear.....Please wait.....Your request is processing......Now Opening youtube....")
                 webbrowser.open("https://www.youtube.com")
             elif 'open facebook' in command:
                 talk("Opening Facebook")
-                talk("Hey dear.....Please wait.....Your request is processing now......Opening Facebook now....")
+                talk("Hey dear.....Please wait.....Your request is processing......Now Opening Facebook....")
                 webbrowser.open("https://www.facebook.com")
             elif 'open whatsapp' in command:
                 talk("Opening WhatsApp")
-                talk("Hey dear.....Please wait.....Your request is processing now......Opening WhatsApp now....")
+                talk("Hey dear.....Please wait.....Your request is processing......Now Opening WhatsApp....")
                 webbrowser.open("https://web.whatsapp.com")
             elif 'open google' in command:
                 talk("Opening Google")
-                talk("Hey dear.....Please wait.....Your request is processing now......Opening Google now....")
+                talk("Hey dear.....Please wait.....Your request is processing......Now Opening Google....")
                 webbrowser.open("https://www.google.com")
             elif 'open email' in command:
                 talk("Opening Email")
-                talk("Hey dear.....Please wait.....Your request is processing now......Opening Email now....")
+                talk("Hey dear.....Please wait.....Your request is processing......Now Opening Email....")
                 webbrowser.open("https://mail.google.com")
             elif 'open github' in command:
-                talk("Hey dear.....Please wait.....Your request is processing now......Opening Github now....")
+                talk("Hey dear.....Please wait.....Your request is processing......Now Opening Github....")
                 webbrowser.open("https://www.github.com")
             elif 'open microsoft word' in command:
-                talk("Hey dear.....Please wait.....Your request is processing now......Opening Microsoft Word now....")
+                talk("Hey dear.....Please wait.....Your request is processing......Now Opening Microsoft Word....")
                 webbrowser.open("https://www.office.com/launch/word")
             elif 'open microsoft powerpoint' in command:
-                talk("Hey dear.....Please wait.....Your request is processing now......Opening Powerpoint now....")
+                talk("Hey dear.....Please wait.....Your request is processing......Now Opening Powerpoint....")
                 webbrowser.open("https://www.office.com/launch/powerpoint")
             elif 'open microsoft excel' in command:
-                talk("Hey dear.....Please wait.....Your request is processing now......Opening Excel now....")
+                talk("Hey dear.....Please wait.....Your request is processing......Now Opening Excel....")
                 webbrowser.open("https://www.office.com/launch/excel")
             elif 'open viber' in command:
-                talk("Hey dear.....Please wait.....Your request is processing now......Opening Viber now....")
+                talk("Hey dear.....Please wait.....Your request is processing......Now Opening Viber....")
                 webbrowser.open("https://www.viber.com/en/download/")
             elif 'open imo' in command:
-                talk("Hey dear.....Please wait.....Your request is processing now......Opening imo now....")
-                webbrowser.open("https://www.imo.com/en/download/")                    
+                talk("Hey dear.....Please wait.....Your request is processing......Now Opening imo....")
+                webbrowser.open("https://www.imo.com/en/download/") 
+            elif 'open chrome' in command:
+                talk("Hey dear.....Please wait.....Your request is processing......Now Opening chrome....")
+                webbrowser.open("https://www.google.com/chrome/")                        
             else:
                 talk("Sorry, I didn't understand that command.")
                 print("No valid command detected.")
